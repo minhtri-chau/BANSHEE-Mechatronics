@@ -35,14 +35,14 @@ def angle_Calc(coor, CLAW_MODE):                                # coor[] = [Px, 
         phi = 45
 
     z3 = coor[2] - Z_OFFSET                                     # z3 = Pr - d1
-    print("z3 = "+ str(z3) + "\n")
+    #print("z3 = "+ str(z3) + "\n")
     z2 = z3 - WRIST_DIST*math.sin(math.radians(phi))            # z2 = z3 - a3*sin(phi)
-    print("z2 = "+ str(z2) + "\n")
+    #print("z2 = "+ str(z2) + "\n")
     
     Pr = math.sqrt(math.pow(coor[0],2)+math.pow(coor[1],2))     # r3 = Pr
-    print("r3 = "+ str(Pr) + "\n")
+    #print("r3 = "+ str(Pr) + "\n")
     r2 = Pr - WRIST_DIST*math.cos(math.radians(phi))            # r2 = r3 - a4*cos(phi)
-    print("r2 = "+ str(r2) + "\n")
+    #print("r2 = "+ str(r2) + "\n")
     
     def base_Theta():      
         if (coor[0] == 0):                                      # if the base theta is 90 or -90 degree
@@ -60,21 +60,21 @@ def angle_Calc(coor, CLAW_MODE):                                # coor[] = [Px, 
 
     def elbow_Theta():                                          # theta3 calculation (20)
         cosTheta3 = (math.pow(r2, 2) + math.pow(z2, 2) - (math.pow(BICEP_DIST, 2) + math.pow(FOREARM_DIST, 2)))/(2*BICEP_DIST*FOREARM_DIST)                 # cos_theta3 = [(r2)^2 + (z2)^2 - ((a2)^2 + (a3)^2)] / (2*a2*a3)
-        print("cosTheta3 = "+ str(cosTheta3) + "\n")
+        #print("cosTheta3 = "+ str(cosTheta3) + "\n")
         theta3 = math.acos(cosTheta3)                           # theta3 = arccos(cos_theta3)
-        print("theta3 = "+ str(-math.degrees(theta3)) + "\n")
+        #print("theta3 = "+ str(-math.degrees(theta3)) + "\n")
         return -math.degrees(theta3), -theta3                   # Elbow motor motion is only physically posibble with negative theta3 value [-180, 0]
 
     def shoulder_Theta(theta3_R):
         
         cosTheta2 = ((BICEP_DIST+FOREARM_DIST*math.cos(theta3_R))*r2 + (FOREARM_DIST*math.sin(theta3_R))*z2)/(math.pow(r2, 2) + math.pow(z2, 2))           # cos_theta2 = [(a2 + a3*cos_theta3)r2 + (a3*sin_theta3)z2] / (r^2 + z^2)
-        print("cosTheta2 = "+ str(cosTheta2) + "\n")
+        #print("cosTheta2 = "+ str(cosTheta2) + "\n")
         sinTheta2 = ((BICEP_DIST+FOREARM_DIST*math.cos(theta3_R))*z2 - (FOREARM_DIST*math.sin(theta3_R))*r2)/(math.pow(r2, 2) + math.pow(z2, 2))           # sin_theta2 = [(a2 + a3*cos_theta3)z2 - (a3*sin_theta3)r2] / (r^2 + z^2)
-        print("sinTheta2 = "+ str(sinTheta2) + "\n")
+        #print("sinTheta2 = "+ str(sinTheta2) + "\n")
         theta2 = math.atan(sinTheta2/cosTheta2)
         if (theta2 <0):                                          # add offset when theta2 is negative (arm pointing to the ground)
             theta2 = theta2 + math.pi   
-        print("theta2 = "+ str(math.degrees(theta2)) + "\n")
+        #print("theta2 = "+ str(math.degrees(theta2)) + "\n")
         return math.degrees(theta2), theta2
 
 
@@ -84,7 +84,7 @@ def angle_Calc(coor, CLAW_MODE):                                # coor[] = [Px, 
     Theta2, Theta2_R = shoulder_Theta(Theta3_R)
     shoulderTheta = Theta2 + 11
     wristTheta = phi - elbowTheta - shoulderTheta
-    print("theta4 = "+ str(wristTheta) + "\n")
+    #print("theta4 = "+ str(wristTheta) + "\n")
 
     if ((baseTheta < BASE_L_LIMIT) or (baseTheta > BASE_H_LIMIT)):                                          
         print("Base angle calculated (%s) is out of physical range [-135, 135]" % (baseTheta))              # setting physical range limit for baseTheta [-135, 135]

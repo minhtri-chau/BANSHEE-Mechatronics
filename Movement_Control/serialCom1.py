@@ -5,15 +5,19 @@ import time
 
 BAUDRATE = 1000000
 
-arduino = serial.Serial('COM9', 9600) 
+arduino = serial.Serial('COM10', 9600) 
 
-time.sleep(2)  # wait for serial connection to establish
+
+time.sleep(3)  # wait for serial connection to establish
 
 arduino.write(b'1')  # send '1' to turn on pod
+print("data sent to arduino")
 time.sleep(5)
 # arduino.write(b'0')  # send '0' to turn off pod
-data = arduino.readline()
-if data == '2':
+data = arduino.read()
+data = int.from_bytes(data, "big")
+print(data)
+if data == 2:
     print("Data from Arduino received")
     motor.portInitialization('COM3', [1])
     motor.dxlSetVelo([30],  [1])
@@ -22,4 +26,7 @@ if data == '2':
 
 
 arduino.write(b'0')  # send '1' to turn on pod
-time.sleep(5)
+time.sleep(3)
+arduino.write(b'1')  # send '1' to turn on pod
+time.sleep(3)
+arduino.close()
