@@ -4,17 +4,17 @@ import Movement_Calc_v2 as calculation
 
 
 BASE_ID = 1
-BICEP_ID = 1
-FOREARM_ID = 1
-WRIST_ID = 1
-CLAW_ID = 1
+BICEP_ID = 2
+FOREARM_ID = 3
+WRIST_ID = 4
+CLAW_ID = 0
 
 PORT_NUM = 'COM3'
 BAUDRATE = 1000000
 
 ALL_IDs = [BASE_ID, BICEP_ID, FOREARM_ID, WRIST_ID, CLAW_ID]
 MOVE_IDs = [BASE_ID, BICEP_ID, FOREARM_ID, WRIST_ID]
-COOR_1 = [5, -255, 40]                                      # In front of the chamber
+COOR_1 = [5, -275, 40]                                      # In front of the chamber
 COOR_2 = [5, -225, 40]                                      # Away from chamber      
 COOR_REST = [275, 0, 205]  
 

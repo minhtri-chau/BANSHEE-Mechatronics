@@ -5,8 +5,9 @@ void setup() {
 }
 
 void loop() {
-  if (Serial.available()) {
-    char incomingByte = Serial.read();
+  if (Serial.available()>0) {
+//    char incomingByte = Serial.read();
+    int mode = Serial.parseInt();
 //    Serial.print("I received: ");
 //    Serial.println(incomingByte);
 //    if (incomingByte == '1') {
@@ -17,12 +18,12 @@ void loop() {
 //      digitalWrite(LED_BUILTIN, LOW);
 //    }
 
-    switch(incomingByte) {
-      case '1':
+    switch(mode) {
+      case 1:
         digitalWrite(6, HIGH);
         Serial.write(2);
         break;
-      case '2':
+      case 2:
         digitalWrite(6, LOW);
         break;
       default:
