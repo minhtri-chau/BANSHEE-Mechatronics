@@ -5,11 +5,17 @@ const int pwm1 = 6; // pin 10 as pwm
 const int dir1 = 5;  // pin 9 as dir
 const int pwm2 = 10; // pin 10 as pwm
 const int dir2 = 9;  // pin 9 as dir
+ //schamtic pins 
+// const int trig1Pin = 7;   //7 <- schematic pin right // test port: 4
+// const int echo1Pin = 8; //8 <-schematic pin right // test port 3
+// const int trig2Pin = 4; //4 <-schematic pin left // test port: 8
+// const int echo2Pin = 3; //3 <- shcematic pin left // test port: 7
 
-const int trig1Pin = 4;
-const int echo1Pin = 3;
-const int trig2Pin = 8;
-const int echo2Pin = 7;
+//test pins 
+const int trig1Pin = 4;   //7 <- schematic pin right // test port: 4
+const int echo1Pin = 3; //8 <-schematic pin right // test port 3
+const int trig2Pin = 8; //4 <-schematic pin left // test port: 8
+const int echo2Pin = 7; //3 <- shcematic pin left // test port: 7
 
 int buff = 0;
 
